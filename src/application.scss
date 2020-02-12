@@ -1,9 +1,9 @@
 $govuk-assets-path: "/public/govuk/assets/" !default;
 
-@function my-url-handler($filename) {
-  @return $govuk-assets-path + "images/" + $filename;
-}
-
-$govuk-image-url-function: 'my-url-handler';
+//@function my-url-handler($filename) {
+//  @return $govuk-assets-path + "images/" + $filename;
+//}
+//
+//$govuk-image-url-function: 'my-url-handler';
 
 @import "node_modules/govuk-frontend/govuk/all";
