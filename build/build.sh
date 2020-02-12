@@ -1,6 +1,6 @@
-if [ ! -d public/govuk ]; then
-  rm -r public/govuk
+if [ -d static ]; then
+  rm -r static
 fi
 
-cp -r ./node_modules/govuk-frontend/govuk/assets ./public/govuk
+cp -r ./node_modules/govuk-frontend/govuk/assets ./static
 
