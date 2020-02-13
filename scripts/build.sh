@@ -3,3 +3,4 @@ if [ -d public/govuk ]; then
 fi
 
 cp -r ./node_modules/govuk-frontend/govuk/assets ./public/govuk
+cp ./public/govuk/images/favicon.ico ./public
