@@ -18,7 +18,7 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "postinstall": "sh build/build.sh"
+    "postinstall": "sh scripts/build.sh"
   },
   "eslintConfig": {
     "extends": "react-app"
