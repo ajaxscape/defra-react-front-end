@@ -1,21 +1,22 @@
 import React from 'react'
 
 function Hint (props) {
-  const { item } = props
-  return !item.hint ? null : <span id={item.id} className="govuk-hint govuk-radios__hint">{item.hint}</span>
+  const { id, item } = props
+  return !item.hint ? null : <span id={id} className="govuk-hint govuk-radios__hint">{item.hint}</span>
 }
 
 export default function RadioItem (props) {
   const { item } = props
-  const { id, name, value, label, divider = null } = item
+  const { id, name, value, label, divider = null, hint } = item
   if (divider) {
     return <div className="govuk-radios__divider">{divider}</div>
   }
+  const hintId = hint ? `${id}-hint` : null
   return (
       <div className="govuk-radios__item">
-        <input className="govuk-radios__input" id={id} name={name} type="radio" value={value}/>
+        <input className="govuk-radios__input" id={id} name={name} type="radio" value={value} aria-describedby={hintId}/>
         <label className="govuk-label govuk-radios__label" htmlFor={id}>{label}</label>
-        <Hint item={item}/>
+        <Hint id={hintId} item={item}/>
       </div>
   )
 }

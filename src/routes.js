@@ -1,6 +1,7 @@
 import Home from './components/pages/Home'
 import WhoOwnsItem from './components/pages/WhoOwnsItem'
 import Feedback from './components/pages/Feedback'
+import ItemType from './components/pages/ItemType'
 
 const routes = {
   home: {
@@ -10,8 +11,15 @@ const routes = {
     component: Home
   },
 
+  'item-type': {
+    path: '/item-type',
+    title: 'What type of item is it?',
+    next: 'home',
+    component: ItemType
+  },
+
   'who-owns-item': {
-    path: '/who-owns-item-xxx',
+    path: '/who-owns-item',
     title: 'Who owns the item?',
     next: 'home',
     component: WhoOwnsItem
