@@ -8,10 +8,14 @@ export default function Main () {
     <main className="govuk-main-wrapper" id="main-content" role="main">
       <Switch>
         {Object.values(routes).map((route) => {
-          return <Route path={route.path} render={(props) => {
-            const myProps = {...props, route}
-            return <route.component {...myProps} />
-          }}/>
+          return <Route
+            path={route.path}
+            exact
+            render={(props) => {
+              const myProps = { ...props, route, nextLink: route.next && routes[route.next].path }
+              return <route.component {...myProps} />
+            }}
+          />
         })}
       </Switch>
     </main>

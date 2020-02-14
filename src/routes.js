@@ -1,5 +1,6 @@
 import Home from './components/pages/Home'
 import WhoOwnsItem from './components/pages/WhoOwnsItem'
+import Feedback from './components/pages/Feedback'
 
 const routes = {
   home: {
@@ -14,6 +15,12 @@ const routes = {
     title: 'Who owns the item?',
     next: 'home',
     component: WhoOwnsItem
+  },
+
+  'feedback': {
+    path: '/feedback',
+    title: 'Please give us feedback',
+    component: Feedback
   }
 }
 
