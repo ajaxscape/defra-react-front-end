@@ -7,8 +7,8 @@ export default function Main () {
   return (
     <main className="govuk-main-wrapper" id="main-content" role="main">
       <Switch>
-        {Object.values(routes).map((route) => {
-          return <Route
+        {Object.values(routes).map((route, index) => {
+          return <Route key={index}
             path={route.path}
             exact
             render={(props) => {
