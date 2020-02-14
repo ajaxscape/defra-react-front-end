@@ -2,7 +2,6 @@ import React from 'react'
 import Form from '../Form'
 import Legend from '../Legend'
 import RadioGroup from '../RadioGroup'
-import Button from '../Button'
 
 const items = [
   {
@@ -18,10 +17,9 @@ const items = [
 export default function WhoOwnsItem (props) {
   const { route } = props
   return (
-    <Form>
+    <Form action={route.path}>
       <Legend>{route.title}</Legend>
       <RadioGroup name='who-owns-item' items={items}/>
-      <Button>Continue</Button>
     </Form>
   )
 }

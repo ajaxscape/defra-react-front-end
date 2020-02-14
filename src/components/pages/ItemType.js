@@ -2,7 +2,6 @@ import React from 'react'
 import Form from '../Form'
 import Legend from '../Legend'
 import RadioGroup from '../RadioGroup'
-import Button from '../Button'
 
 const items = [
   {
@@ -38,7 +37,6 @@ export default function ItemType (props) {
     <Form>
       <Legend>{route.title}</Legend>
       <RadioGroup name='item-type' items={items}/>
-      <Button>Continue</Button>
     </Form>
   )
 }

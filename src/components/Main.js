@@ -6,18 +6,22 @@ import routes from '../routes'
 export default function Main () {
   return (
     <main className="govuk-main-wrapper" id="main-content" role="main">
-      <Switch>
-        {Object.values(routes).map((route, index) => {
-          return <Route key={index}
-            path={route.path}
-            exact
-            render={(props) => {
-              const nextLink = route.next && routes[route.next].path
-              return <route.component {...{ ...props, route, nextLink }} />
-            }}
-          />
-        })}
-      </Switch>
+      <div className="govuk-grid-row">
+        <div className="govuk-grid-column-two-thirds">
+          <Switch>
+            {Object.values(routes).map((route, index) => {
+              return <Route key={index}
+                path={route.path}
+                exact
+                render={(props) => {
+                  const nextLink = route.next && routes[route.next].path
+                  return <route.component {...{ ...props, route, nextLink }} />
+                }}
+              />
+            })}
+          </Switch>
+        </div>
+      </div>
     </main>
   )
 }
