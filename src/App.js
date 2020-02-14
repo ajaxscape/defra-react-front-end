@@ -5,7 +5,7 @@ import Header from './components/Header'
 import PhaseBanner from './components/PhaseBanner'
 import Footer from './components/Footer'
 
-const serviceName = 'Frontend react app'
+const serviceName = 'Frontend React App Experiment'
 const phase = 'beta'
 const feedbackLink = '/feedback'
 
