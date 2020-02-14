@@ -12,8 +12,8 @@ export default function Main () {
             path={route.path}
             exact
             render={(props) => {
-              const myProps = { ...props, route, nextLink: route.next && routes[route.next].path }
-              return <route.component {...myProps} />
+              const nextLink = route.next && routes[route.next].path
+              return <route.component {...{ ...props, route, nextLink }} />
             }}
           />
         })}

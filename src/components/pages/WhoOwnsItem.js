@@ -1,12 +1,30 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Form from '../Form'
+import Legend from '../Legend'
+import RadioGroup from '../RadioGroup'
+
+const items = [
+  {
+    value: 'england',
+    label: 'England'
+  },
+
+  { divider: 'or' },
+
+  {
+    value: 'germany',
+    label: 'Germany',
+    hint: 'Great Beer'
+  }
+
+]
 
 export default function WhoOwnsItem (props) {
-  const { nextLink } = props
+  const { route } = props
   return (
-    <div>
-      <h1>My Item</h1>
-      <Link to = {nextLink}>Next</Link>
-    </div>
+    <Form>
+      <Legend>{route.title}</Legend>
+      <RadioGroup name='who-owns-item' items={items}/>
+    </Form>
   )
 }

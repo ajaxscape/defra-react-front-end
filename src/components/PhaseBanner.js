@@ -1,11 +1,8 @@
 import React from 'react'
 
-export default function Header (props) {
-  const { phase = '', feedbackLink = '#' } = props
-  if (!phase) {
-    return null
-  }
-  return (
+export default function PhaseBanner (props) {
+  const { phase = null, feedbackLink = '#' } = props
+  return !phase ? null : (
     <div className="govuk-phase-banner">
       <p className="govuk-phase-banner__content">
         <strong className="govuk-tag govuk-phase-banner__content__tag">
