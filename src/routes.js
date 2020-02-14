@@ -7,14 +7,14 @@ const routes = {
   home: {
     path: '/',
     title: 'Home',
-    next: 'who-owns-item',
+    next: 'item-type',
     component: Home
   },
 
   'item-type': {
     path: '/item-type',
     title: 'What type of item is it?',
-    next: 'home',
+    next: 'who-owns-item',
     component: ItemType
   },
 

@@ -16,8 +16,13 @@ const items = [
 
 export default function WhoOwnsItem (props) {
   const { route } = props
+
+  async function onSubmit () {
+    window.alert('Cheese')
+  }
+
   return (
-    <Form action={route.path}>
+    <Form onSubmit={onSubmit} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
       <RadioGroup name='who-owns-item' items={items}/>
     </Form>

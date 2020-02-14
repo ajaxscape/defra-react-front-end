@@ -1,4 +1,5 @@
 import React from 'react'
+
 import Form from '../Form'
 import Legend from '../Legend'
 import RadioGroup from '../RadioGroup'
@@ -33,8 +34,13 @@ const items = [
 
 export default function ItemType (props) {
   const { route } = props
+
+  async function onSubmit () {
+    window.alert('Cheese Please')
+  }
+
   return (
-    <Form>
+    <Form onSubmit={onSubmit} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
       <RadioGroup name='item-type' items={items}/>
     </Form>
