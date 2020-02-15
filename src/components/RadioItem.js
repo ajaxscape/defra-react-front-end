@@ -6,7 +6,7 @@ function Hint (props) {
 }
 
 export default function RadioItem (props) {
-  const { item } = props
+  const { item, value: currentValue, onChange } = props
   const { id, name, value, label, divider = null, hint } = item
   if (divider) {
     return <div className="govuk-radios__divider">{divider}</div>
@@ -14,7 +14,16 @@ export default function RadioItem (props) {
   const hintId = hint ? `${id}-hint` : null
   return (
       <div className="govuk-radios__item">
-        <input className="govuk-radios__input" id={id} name={name} type="radio" value={value} aria-describedby={hintId}/>
+        <input
+          className="govuk-radios__input"
+          id={id}
+          name={name}
+          type="radio"
+          value={value}
+          checked={currentValue === value}
+          onChange={onChange}
+          aria-describedby={hintId}
+        />
         <label className="govuk-label govuk-radios__label" htmlFor={id}>{label}</label>
         <Hint id={hintId} item={item}/>
       </div>

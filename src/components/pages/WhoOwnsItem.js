@@ -17,8 +17,8 @@ const items = [
 export default function WhoOwnsItem (props) {
   const { route } = props
 
-  async function onSubmit () {
-    window.alert('Cheese')
+  async function onSubmit (data) {
+    window.alert(JSON.stringify(data))
   }
 
   return (

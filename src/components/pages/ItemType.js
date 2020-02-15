@@ -35,8 +35,8 @@ const items = [
 export default function ItemType (props) {
   const { route } = props
 
-  async function onSubmit () {
-    window.alert('Cheese Please')
+  async function onSubmit (data) {
+    window.alert(JSON.stringify(data))
   }
 
   return (
