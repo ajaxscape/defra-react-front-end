@@ -10,8 +10,6 @@ export default function RadioGroup (props) {
   const { data } = useContext(FormContext)
   data[name] = value
 
-  console.log(JSON.stringify(data))
-
   function onChange (e) {
     setValue(e.target.value)
   }
