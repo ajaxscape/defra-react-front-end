@@ -21,7 +21,7 @@ export default function Main () {
                   exact
                   render={(props) => {
                     const nextLink = route.next && routes[route.next].path
-                    return <route.component {...{ ...props, route, nextLink }} />
+                    return <route.component {...{ ...props, route, nextLink, appData }} />
                   }}
                 />
               })}

@@ -3,7 +3,6 @@ import React from 'react'
 import Form from '../Form'
 import Legend from '../Legend'
 import RadioGroup from '../RadioGroup'
-import useAppData from '../hooks/useAppData'
 
 const items = [
   {
@@ -34,12 +33,12 @@ const items = [
 ]
 
 export default function ItemType (props) {
-  const { route } = props
+  const { route, appData } = props
 
-  const { data, setAppData } = useAppData()
+  const { data, setAppData } = appData
 
   async function onSubmit (formData) {
-     setAppData({...data, ...formData})
+    setAppData({...data, ...formData})
   }
 
   return (

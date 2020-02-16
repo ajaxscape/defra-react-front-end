@@ -3,8 +3,6 @@ import Form from '../Form'
 import Legend from '../Legend'
 import RadioGroup from '../RadioGroup'
 
-import useAppData from '../hooks/useAppData'
-
 const items = [
   {
     label: 'I own it',
@@ -17,9 +15,9 @@ const items = [
 ]
 
 export default function WhoOwnsItem (props) {
-  const { route } = props
+  const { route, appData } = props
 
-  const { data, setAppData } = useAppData()
+  const { data, setAppData } = appData
 
   async function onSubmit (formData) {
     setAppData({...data, ...formData})
