@@ -20,7 +20,10 @@ export default function WhoOwnsItem (props) {
   const { data, setAppData } = appData
 
   async function onSubmit (formData) {
-    setAppData({...data, ownerType: formData['who-owns-item']})
+    const ownerType = formData['who-owns-item']
+    if (ownerType !== data.ownerType) {
+      setAppData({...data, ownerType})
+    }
   }
 
   return (

@@ -36,7 +36,10 @@ export default function ItemType (props) {
   const { data, setAppData } = appData
 
   async function onSubmit (formData) {
-    setAppData({...data, itemType: formData['item-type']})
+    const itemType = formData['item-type']
+    if (itemType !== data.itemType) {
+      setAppData({...data, itemType})
+    }
   }
 
   return (
