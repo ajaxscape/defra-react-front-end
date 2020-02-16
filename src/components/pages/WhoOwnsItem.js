@@ -16,7 +16,6 @@ const items = [
 
 export default function WhoOwnsItem (props) {
   const { route, appData } = props
-
   const { data, setAppData } = appData
 
   async function onSubmit (formData) {

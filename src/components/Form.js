@@ -9,9 +9,7 @@ export default function Form (props) {
 
   async function onSubmitForm (e) {
     e.preventDefault()
-    if (onSubmit) {
-      await onSubmit(formData.data)
-    }
+    if (onSubmit) { await onSubmit(formData.data) }
     history.push(nextLink)
   }
 
