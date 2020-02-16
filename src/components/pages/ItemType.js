@@ -45,7 +45,7 @@ export default function ItemType (props) {
   return (
     <Form onSubmit={onSubmit} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
-      <RadioGroup name='item-type' items={items} initialValue={data.itemType}/>
+      <RadioGroup name='item-type' items={items} value={data.itemType}/>
     </Form>
   )
 }

@@ -29,7 +29,7 @@ export default function WhoOwnsItem (props) {
   return (
     <Form onSubmit={onSubmit} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
-      <RadioGroup name='who-owns-item' items={items} initialValue={data.ownerType}/>
+      <RadioGroup name='who-owns-item' items={items} value={data.ownerType}/>
     </Form>
   )
 }

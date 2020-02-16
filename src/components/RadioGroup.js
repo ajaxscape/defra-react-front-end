@@ -3,7 +3,7 @@ import RadioItem from './RadioItem'
 import FormContext from './FormContext'
 
 export default function RadioGroup (props) {
-  const { name = '', items = [], initialValue } = props
+  const { name = '', items = [], value: initialValue } = props
   const [value, setValue] = useState(initialValue)
 
   function onChange (e) {
