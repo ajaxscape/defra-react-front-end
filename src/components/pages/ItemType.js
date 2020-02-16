@@ -38,10 +38,8 @@ export default function ItemType (props) {
 
   const { data, setAppData } = useAppData()
 
-  console.log(data)
-
   async function onSubmit (formData) {
-    setAppData({...data, ...formData})
+     setAppData({...data, ...formData})
   }
 
   return (

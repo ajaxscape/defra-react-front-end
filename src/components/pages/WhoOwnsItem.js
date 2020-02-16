@@ -21,8 +21,6 @@ export default function WhoOwnsItem (props) {
 
   const { data, setAppData } = useAppData()
 
-  console.log(data)
-
   async function onSubmit (formData) {
     setAppData({...data, ...formData})
   }
