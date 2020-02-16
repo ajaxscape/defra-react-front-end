@@ -29,7 +29,6 @@ const items = [
     label: 'Item of outstanding artistic, cultural or historical value made before 1918',
     value: 'apply-for-an-rmi-certificate'
   }
-
 ]
 
 export default function ItemType (props) {
@@ -37,13 +36,13 @@ export default function ItemType (props) {
   const { data, setAppData } = appData
 
   async function onSubmit (formData) {
-    setAppData({...data, ...formData})
+    setAppData({...data, itemType: formData['item-type']})
   }
 
   return (
     <Form onSubmit={onSubmit} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
-      <RadioGroup name='item-type' items={items}/>
+      <RadioGroup name='item-type' items={items} initialValue={data.itemType}/>
     </Form>
   )
 }

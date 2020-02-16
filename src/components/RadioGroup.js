@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import RadioItem from './RadioItem'
 import FormContext from './FormContext'
 
 export default function RadioGroup (props) {
-  const { name = '', items = [] } = props
+  const { name = '', items = [], initialValue } = props
 
-  const [value, setValue] = useState(null)
+  const [value, setValue] = useState(initialValue)
 
   const { data } = useContext(FormContext)
-  data[name] = value
+
+  if (value) {
+    data[name] = value
+  }
 
   function onChange (e) {
     setValue(e.target.value)

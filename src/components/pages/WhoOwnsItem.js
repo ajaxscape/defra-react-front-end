@@ -12,6 +12,7 @@ const items = [
     label: 'Someone else owns it',
     value: 'someone-else'
   }
+
 ]
 
 export default function WhoOwnsItem (props) {
@@ -19,13 +20,13 @@ export default function WhoOwnsItem (props) {
   const { data, setAppData } = appData
 
   async function onSubmit (formData) {
-    setAppData({...data, ...formData})
+    setAppData({...data, ownerType: formData['who-owns-item']})
   }
 
   return (
     <Form onSubmit={onSubmit} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
-      <RadioGroup name='who-owns-item' items={items}/>
+      <RadioGroup name='who-owns-item' items={items} initialValue={data.ownerType}/>
     </Form>
   )
 }

@@ -21,7 +21,7 @@ const routes = {
   'who-owns-item': {
     path: '/who-owns-item',
     title: 'Who owns the item?',
-    next: 'item-type',
+    next: 'home',
     component: WhoOwnsItem
   },
 
