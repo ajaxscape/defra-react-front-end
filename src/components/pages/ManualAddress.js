@@ -2,8 +2,7 @@ import React from 'react'
 
 import Form from '../Form'
 import Legend from '../Legend'
-import RadioGroup from '../fields/RadioGroup'
-import FieldGroup from '../fields/FieldGroup'
+import TextInput from '../fields/TextInput'
 
 export default function ManualAddress (props) {
   const { route, appData } = props
@@ -24,15 +23,45 @@ export default function ManualAddress (props) {
     setAppData({ ...data, address })
   }
 
+  const { address = {} } = data
+
   return (
     <Form onSubmit={onSubmit} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
-      <FieldGroup {...props}>
-        <label className="govuk-label" htmlFor="address-line-1">
-          Building and street <span className="govuk-visually-hidden">line 1 of 2</span>
-        </label>
-        <input className="govuk-input" id="address-line-1" name="address-line-1" type="text" autoComplete="address-line1"/>
-      </FieldGroup>
+      <TextInput
+        id="address-line-1"
+        label="Building and street"
+        labelHidden="line 1 of 2"
+        value={address.addressLine1}
+        {...props}
+      />
+      <TextInput
+        id="address-line-2"
+        labelHidden="Building and street line 2"
+        value={address.addressLine2}
+        {...props}
+      />
+      <TextInput
+        id="town"
+        label="Town or city"
+        value={address.town}
+        className='govuk-!-width-two-thirds'
+        {...props}
+      />
+      <TextInput
+        id="county"
+        label="County"
+        value={address.county}
+        className='govuk-!-width-two-thirds'
+        {...props}
+      />
+      <TextInput
+        id="postcode"
+        label="Postcode"
+        value={address.postcode}
+        className='govuk-input--width-10'
+        {...props}
+      />
     </Form>
 )
 }
