@@ -16,20 +16,19 @@ function LabelHidden (props) {
   return !children ? null : <span className="govuk-visually-hidden">{children}</span>
 }
 
-function getAriaDescribedBy ({ hintId, name, error }) {
-  if (error) {
-    const errorClass = `${name}-error`
+function getAriaDescribedBy ({ hintId, errorId }) {
+  if (errorId) {
     if (hintId) {
-      return `${hintId} ${errorClass}`
+      return `${hintId} ${errorId}`
     } else {
-      return errorClass
+      return errorId
     }
   }
   return hintId
 }
 
 export default function TextInput (props) {
-  const { id, name = id, value: initialValue, type = 'text', label = null, labelHidden = null, hint, className = '', error = null } = props
+  const { id, name = id, value: initialValue, type = 'text', label = null, labelHidden = null, hint = null, className = '', error = null } = props
   const hintId = hint ? `${name}-hint` : null
   const errorId = error ? `${name}-error` : null
 
@@ -42,16 +41,18 @@ export default function TextInput (props) {
   const { data } = useContext(FormContext)
   data[name] = value
 
-  const ariaDescribedBy = getAriaDescribedBy({hintId, name, error})
+  const ariaDescribedBy = getAriaDescribedBy({hintId, errorId})
+
+  console.log(ariaDescribedBy)
 
   return (
     <div className={`govuk-form-group ${error ? 'govuk-form-group--error' : ''}`}>
       <label className="govuk-label" htmlFor={id}>{label}<LabelHidden>{labelHidden}</LabelHidden></label>
-      <Hint id={hintId}/>
-      <Error id={errorId}/>
+      <Hint id={hintId} hint={hint}/>
+      <Error id={errorId} error={error}/>
       <input
         id={id}
-        className={`govuk-input ${className}`}
+        className={`govuk-input ${className} ${error ? 'govuk-input--error' : ''}`}
         name={name}
         type={type}
         aria-describedby={ariaDescribedBy}

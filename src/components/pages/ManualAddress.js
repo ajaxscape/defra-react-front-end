@@ -58,6 +58,7 @@ export default function ManualAddress (props) {
       <TextInput
         id="postcode"
         label="Postcode"
+        hint="What ever"
         value={address.postcode}
         className='govuk-input--width-10'
         error='Test error'
