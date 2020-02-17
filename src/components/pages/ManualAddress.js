@@ -60,6 +60,7 @@ export default function ManualAddress (props) {
         label="Postcode"
         value={address.postcode}
         className='govuk-input--width-10'
+        error='Test error'
         {...props}
       />
     </Form>

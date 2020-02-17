@@ -12,7 +12,7 @@ function LabelHidden (props) {
 }
 
 export default function TextInput (props) {
-  const { id, name = id, value: initialValue, type = 'text', label = null, labelHidden = null, hint, className = '' } = props
+  const { id, name = id, value: initialValue, type = 'text', label = null, labelHidden = null, hint, className = '', error = null } = props
   const hintId = hint ? `${id}-hint` : null
 
   const [value, setValue] = useState(initialValue || '')
@@ -25,7 +25,7 @@ export default function TextInput (props) {
   data[name] = value
 
   return (
-    <div className="govuk-form-group">
+    <div className={`govuk-form-group ${error ? 'govuk-form-group--error' : ''}`}>
       <label className="govuk-label" htmlFor={id}>{label}<LabelHidden>{labelHidden}</LabelHidden></label>
       <Hint id={hintId}/>
       <input
