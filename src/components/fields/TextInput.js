@@ -6,14 +6,32 @@ function Hint (props) {
   return !hint ? null : <span id={id} className="govuk-hint">{hint}</span>
 }
 
+function Error (props) {
+  const { id, error } = props
+  return !error ? null : <span id={id} className="govuk-error-message"><span className="govuk-visually-hidden">Error:</span> {error}</span>
+}
+
 function LabelHidden (props) {
   const { children } = props
   return !children ? null : <span className="govuk-visually-hidden">{children}</span>
 }
 
+function getAriaDescribedBy ({ hintId, name, error }) {
+  if (error) {
+    const errorClass = `${name}-error`
+    if (hintId) {
+      return `${hintId} ${errorClass}`
+    } else {
+      return errorClass
+    }
+  }
+  return hintId
+}
+
 export default function TextInput (props) {
   const { id, name = id, value: initialValue, type = 'text', label = null, labelHidden = null, hint, className = '', error = null } = props
-  const hintId = hint ? `${id}-hint` : null
+  const hintId = hint ? `${name}-hint` : null
+  const errorId = error ? `${name}-error` : null
 
   const [value, setValue] = useState(initialValue || '')
 
@@ -24,16 +42,19 @@ export default function TextInput (props) {
   const { data } = useContext(FormContext)
   data[name] = value
 
+  const ariaDescribedBy = getAriaDescribedBy({hintId, name, error})
+
   return (
     <div className={`govuk-form-group ${error ? 'govuk-form-group--error' : ''}`}>
       <label className="govuk-label" htmlFor={id}>{label}<LabelHidden>{labelHidden}</LabelHidden></label>
       <Hint id={hintId}/>
+      <Error id={errorId}/>
       <input
         id={id}
         className={`govuk-input ${className}`}
         name={name}
         type={type}
-        aria-describedby={hintId}
+        aria-describedby={ariaDescribedBy}
         autoComplete="on"
         spellCheck="false"
         onChange={onChange}
