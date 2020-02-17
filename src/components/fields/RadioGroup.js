@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import RadioItem from './RadioItem'
-import FormContext from './FormContext'
+import FormContext from '../FormContext'
 
 export default function RadioGroup (props) {
   const { name = '', items = [], value: initialValue } = props

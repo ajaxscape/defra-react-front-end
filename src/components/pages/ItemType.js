@@ -2,7 +2,7 @@ import React from 'react'
 
 import Form from '../Form'
 import Legend from '../Legend'
-import RadioGroup from '../RadioGroup'
+import RadioGroup from '../fields/RadioGroup'
 
 const items = [
   {
