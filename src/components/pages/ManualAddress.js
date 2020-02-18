@@ -1,8 +1,38 @@
 import React from 'react'
+import { Validator } from 'jsonschema'
 
 import Form from '../Form'
 import Legend from '../Legend'
 import TextInput from '../fields/TextInput'
+
+const addressSchema = {
+  'id': '/Address',
+  'type': 'object',
+  'properties': {
+    'businessName': { 'type': 'string' },
+    'addressLine1': {
+      'type': 'string',
+      'minLength': 1,
+    },
+    'addressLine2': { 'type': 'string' },
+    'town': {
+      'type': 'string',
+      'minLength': 1,
+    },
+    'postcode': {
+      'type': 'string',
+      'minLength': 1,
+    },
+    'country': { 'type': 'string' },
+    'uprn': { 'type': 'string' },
+
+  },
+  'required': [
+    'addressLine1',
+    'town',
+    'postcode',
+  ],
+}
 
 export default function ManualAddress (props) {
   const { route, appData } = props
@@ -19,6 +49,10 @@ export default function ManualAddress (props) {
       country: formData['country'],
       uprn: formData['uprn'],
     }
+
+    const validator = new Validator()
+    validator.addSchema(addressSchema, '/Address')
+    console.log(validator.validate(address, addressSchema))
 
     setAppData({ ...data, address })
   }
@@ -65,5 +99,5 @@ export default function ManualAddress (props) {
         {...props}
       />
     </Form>
-)
+  )
 }
