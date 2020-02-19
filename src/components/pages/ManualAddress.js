@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Validator } from 'jsonschema'
 
 import Form from '../Form'
@@ -37,6 +37,11 @@ const addressSchema = {
 export default function ManualAddress (props) {
   const { route, appData } = props
   const { data, setAppData } = appData
+  const errors = {}
+
+  console.log('****************')
+  console.log(errors)
+  console.log('****************')
 
   async function onSubmit (formData) {
     const address = {
@@ -52,9 +57,16 @@ export default function ManualAddress (props) {
 
     const validator = new Validator()
     validator.addSchema(addressSchema, '/Address')
-    console.log(validator.validate(address, addressSchema))
+    validator.validate(address, addressSchema).errors.forEach(({property, message}) => {
+      property.substr(property.indexOf('.'))
+      errors[property.substr(property.indexOf('.')+1)] = message
+    })
 
-    setAppData({ ...data, address })
+    if (errors.length) {
+      return errors
+    } else {
+      setAppData({ ...data, address })
+    }
   }
 
   const { address = {} } = data
@@ -67,12 +79,14 @@ export default function ManualAddress (props) {
         label="Building and street"
         labelHidden="line 1 of 2"
         value={address.addressLine1}
+        error={errors.addressLine1}
         {...props}
       />
       <TextInput
         id="address-line-2"
         labelHidden="Building and street line 2"
         value={address.addressLine2}
+        error={errors.addressLine2}
         {...props}
       />
       <TextInput
@@ -80,6 +94,7 @@ export default function ManualAddress (props) {
         label="Town or city"
         value={address.town}
         className='govuk-!-width-two-thirds'
+        error={errors.town}
         {...props}
       />
       <TextInput
@@ -87,6 +102,7 @@ export default function ManualAddress (props) {
         label="County"
         value={address.county}
         className='govuk-!-width-two-thirds'
+        error={errors.county}
         {...props}
       />
       <TextInput
@@ -95,7 +111,7 @@ export default function ManualAddress (props) {
         hint="What ever"
         value={address.postcode}
         className='govuk-input--width-10'
-        error='Test error'
+        error={errors.postcode}
         {...props}
       />
     </Form>

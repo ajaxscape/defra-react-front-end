@@ -9,8 +9,13 @@ export default function Form (props) {
 
   async function onSubmitForm (e) {
     e.preventDefault()
-    if (onSubmit) { await onSubmit(formData.data) }
-    history.push(nextLink)
+    let errors = []
+    if (onSubmit) {
+      errors = await onSubmit(formData.data)
+    }
+    if (!errors.length) {
+      history.push(nextLink)
+    }
   }
 
   return (
