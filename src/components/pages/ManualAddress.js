@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Validator } from 'jsonschema'
 
 import Form from '../Form'
@@ -37,11 +37,13 @@ const addressSchema = {
 export default function ManualAddress (props) {
   const { route, appData } = props
   const { data, setAppData } = appData
-  const errors = {}
+  const [ errors, setErrors ] = useState({})
 
-  console.log('****************')
-  console.log(errors)
-  console.log('****************')
+  console.log('Errors: ', errors)
+
+  useEffect(() => {
+    setErrors(errors)
+  })
 
   async function onSubmit (formData) {
     const address = {
@@ -63,10 +65,10 @@ export default function ManualAddress (props) {
     })
 
     if (errors.length) {
-      return errors
-    } else {
       setAppData({ ...data, address })
     }
+
+    return errors
   }
 
   const { address = {} } = data
