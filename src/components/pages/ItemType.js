@@ -31,6 +31,17 @@ const items = [
   }
 ]
 
+const schema = {
+  'id': '/ItemType',
+  'type': 'object',
+  'properties': {
+    'item-type': { 'type': 'string' }
+  },
+  'required': [
+    'item-type'
+  ],
+}
+
 export default function ItemType (props) {
   const { route, appData } = props
   const { data, setAppData } = appData
@@ -40,7 +51,7 @@ export default function ItemType (props) {
   }
 
   return (
-    <Form handleValidated={handleValidated} action={route.path} {...props}>
+    <Form handleValidated={handleValidated} schema={schema} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
       <RadioGroup name='item-type' items={items} value={data.itemType}/>
     </Form>
