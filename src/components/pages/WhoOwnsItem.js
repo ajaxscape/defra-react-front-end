@@ -19,15 +19,12 @@ export default function WhoOwnsItem (props) {
   const { route, appData } = props
   const { data, setAppData } = appData
 
-  async function onSubmit (formData) {
-    const ownerType = formData['who-owns-item']
-    if (ownerType !== data.ownerType) {
-      setAppData({...data, ownerType})
-    }
+  async function handleValidated (formData) {
+    setAppData({...data, ...formData})
   }
 
   return (
-    <Form onSubmit={onSubmit} action={route.path} {...props}>
+    <Form handleValidated={handleValidated} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
       <RadioGroup name='who-owns-item' items={items} value={data.ownerType}/>
     </Form>
