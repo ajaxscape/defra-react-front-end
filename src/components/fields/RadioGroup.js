@@ -23,16 +23,11 @@ function getAriaDescribedBy ({ hintId, errorId }) {
 }
 
 export default function RadioGroup (props) {
-  const { name = '', items = [], value: initialValue, hint = null, error = null } = props
+  const { name = '', items = [], value = null, hint = null, error = null, handleChange = null } = props
   const hintId = hint ? `${name}-hint` : null
   const errorId = error ? `${name}-error` : null
 
   const ariaDescribedBy = getAriaDescribedBy({hintId, errorId})
-  const [value, setValue] = useState(initialValue)
-
-  function onChange (e) {
-    setValue(e.target.value)
-  }
 
   return (
     <div className={`govuk-form-group ${error ? 'govuk-form-group--error' : ''}`}>
@@ -41,7 +36,7 @@ export default function RadioGroup (props) {
       <div className="govuk-radios">
         {items.map((item, index) => {
           const id = index ? `${name}-${index + 1}` : name
-          return <RadioItem key={index} item={{ id, name, ...item }} onChange={onChange} value={value}/>
+          return <RadioItem key={index} item={{ id, name, ...item }} handleChange={handleChange} value={value}/>
         })}
       </div>
     </div>
