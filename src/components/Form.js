@@ -54,11 +54,9 @@ export default function Form (props) {
 
   return (
     <form action={action} onSubmit={handleSubmit} method="post" noValidate>
-      <div className="govuk-form-group">
         <fieldset className="govuk-fieldset">
           <FormWrapper handleChange={handleChange} values={values} errors={errors} {...props} />
         </fieldset>
-      </div>
 
       <Button>Continue</Button>
     </form>

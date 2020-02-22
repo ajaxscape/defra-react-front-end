@@ -35,7 +35,7 @@ export default function RadioGroup (props) {
   }
 
   return (
-    <div callName="radio-wrapper">
+    <div className={`govuk-form-group ${error ? 'govuk-form-group--error' : ''}`}>
       <Hint id={hintId} hint={hint}/>
       <Error id={errorId} error={error}/>
       <div className="govuk-radios">
