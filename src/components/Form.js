@@ -4,12 +4,16 @@ import useForm from './hooks/useForm'
 import { Validator } from 'jsonschema'
 
 function FormWrapper (props) {
-  const { children, handleChange, values, errors, route, } = props
-  const elements = Children.toArray(children).
-    map((element) => {
-      const { id, value, error } = element.props
-      return cloneElement(element, { handleChange, value: values[id] || value, error: errors[id] || error, route } )
+  const { children, handleChange, values, errors, route } = props
+  const elements = Children.toArray(children).map((element) => {
+    const { id, value, error } = element.props
+    return cloneElement(element, {
+      handleChange,
+      value: values[id],
+      error: errors[id],
+      route,
     })
+  })
   return (
     <div className='form-wrapper'>
       {elements}
@@ -18,7 +22,7 @@ function FormWrapper (props) {
 }
 
 export default function Form (props) {
-  const { action = null, schema = null, handleValidated = null, children = null, nextLink, history } = props
+  const { action = null, schema = null, handleValidated, history, nextLink } = props
 
   const validate = (values) => {
     const errors = {}
@@ -33,18 +37,24 @@ export default function Form (props) {
     return errors
   }
 
+  const formCallback = (...args) => {
+    handleValidated(...args)
+    history.push(nextLink)
+  }
+
   const {
     values,
     errors,
     handleChange,
     handleSubmit,
-  } = useForm(handleValidated, validate)
+  } = useForm(formCallback, validate)
 
   return (
     <form action={action} onSubmit={handleSubmit} method="post" noValidate>
       <div className="govuk-form-group">
         <fieldset className="govuk-fieldset">
-          <FormWrapper handleChange={handleChange} values={values} errors={errors} {...props} />
+          <FormWrapper handleChange={handleChange} values={values}
+                       errors={errors} {...props} />
         </fieldset>
       </div>
 
