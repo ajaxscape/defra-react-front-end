@@ -1,5 +1,4 @@
 import React from 'react'
-import camelcase from 'camelcase'
 
 import Form from '../Form'
 import Legend from '../Legend'
@@ -34,21 +33,12 @@ const schema = {
   ],
 }
 
-const camelCaseKeys = (data) => {
-  const convertedData = {}
-  Object.entries(data).forEach(([prop, value]) => {
-    convertedData[camelcase(prop)] = typeof value === 'object' ? camelCaseKeys(value) : value
-  })
-  return convertedData
-}
-
 export default function ManualAddress (props) {
   const { route, appData } = props
   const { data , setAppData } = appData
 
   const handleValidated = (validatedData) => {
-    const convertedData = camelCaseKeys(validatedData)
-    setAppData({...data, address: {...convertedData}})
+    setAppData({...data, address: {...validatedData}})
   }
   
   const { address = {} } = data

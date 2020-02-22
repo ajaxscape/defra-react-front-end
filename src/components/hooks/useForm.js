@@ -1,4 +1,13 @@
 import { useState, useEffect } from 'react'
+import camelcase from 'camelcase'
+
+const camelCaseKeys = (data) => {
+  const convertedData = {}
+  Object.entries(data).forEach(([prop, value]) => {
+    convertedData[camelcase(prop)] = typeof value === 'object' ? camelCaseKeys(value) : value
+  })
+  return convertedData
+}
 
 const useForm = (handleValidated, validate) => {
 
@@ -8,7 +17,7 @@ const useForm = (handleValidated, validate) => {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
-      handleValidated(values)
+      handleValidated(camelCaseKeys(values))
     }
   }, [errors])
 

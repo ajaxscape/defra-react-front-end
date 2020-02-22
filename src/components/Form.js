@@ -9,8 +9,8 @@ function FormWrapper (props) {
     const { id, value, error } = element.props
     return cloneElement(element, {
       handleChange,
-      value: values[id],
-      error: errors[id],
+      value: values[id] === undefined ? value : values[id],
+      error: errors[id] === undefined ? error : errors[id],
       route,
     })
   })
@@ -26,14 +26,17 @@ export default function Form (props) {
 
   const validate = (values) => {
     const errors = {}
-    const validator = new Validator()
-    validator.addSchema(schema, schema.id)
-    validator.validate(values, schema).
-      errors.
-      forEach(({ property, message }) => {
-        property.substr(property.indexOf('.'))
-        errors[property.substr(property.indexOf('.') + 1)] = message
+    if (schema) {
+      const validator = new Validator()
+      validator.addSchema(schema, schema.id)
+      const result = validator.validate(values, schema).errors
+      result.forEach(({ property, message, name, argument }) => {
+        if (name === 'required') {
+          errors[argument] = message
+        } else
+          errors[property.substr(property.indexOf('.') + 1)] = message
       })
+    }
     return errors
   }
 
@@ -53,8 +56,7 @@ export default function Form (props) {
     <form action={action} onSubmit={handleSubmit} method="post" noValidate>
       <div className="govuk-form-group">
         <fieldset className="govuk-fieldset">
-          <FormWrapper handleChange={handleChange} values={values}
-                       errors={errors} {...props} />
+          <FormWrapper handleChange={handleChange} values={values} errors={errors} {...props} />
         </fieldset>
       </div>
 

@@ -35,15 +35,12 @@ export default function ItemType (props) {
   const { route, appData } = props
   const { data, setAppData } = appData
 
-  async function onSubmit (formData) {
-    const itemType = formData['item-type']
-    if (itemType !== data.itemType) {
-      setAppData({...data, itemType})
-    }
+  async function handleValidated (formData) {
+    setAppData({...data, ...formData})
   }
 
   return (
-    <Form onSubmit={onSubmit} action={route.path} {...props}>
+    <Form handleValidated={handleValidated} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
       <RadioGroup name='item-type' items={items} value={data.itemType}/>
     </Form>

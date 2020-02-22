@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react'
 import RadioItem from './RadioItem'
-import FormContext from '../FormContext'
 
 export default function RadioGroup (props) {
   const { name = '', items = [], value: initialValue } = props
@@ -9,9 +8,6 @@ export default function RadioGroup (props) {
   function onChange (e) {
     setValue(e.target.value)
   }
-
-  const { data } = useContext(FormContext)
-  data[name] = value
 
   return (
     <div className="govuk-radios">
