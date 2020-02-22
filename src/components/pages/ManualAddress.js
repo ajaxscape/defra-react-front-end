@@ -1,20 +1,20 @@
-import React, {useState, useEffect} from 'react'
-import { Validator } from 'jsonschema'
+import React from 'react'
+import camelcase from 'camelcase'
 
 import Form from '../Form'
 import Legend from '../Legend'
 import TextInput from '../fields/TextInput'
 
-const addressSchema = {
+const schema = {
   'id': '/Address',
   'type': 'object',
   'properties': {
-    'businessName': { 'type': 'string' },
-    'addressLine1': {
+    'business-name': { 'type': 'string' },
+    'address-line-1': {
       'type': 'string',
       'minLength': 1,
     },
-    'addressLine2': { 'type': 'string' },
+    'address-line-2': { 'type': 'string' },
     'town': {
       'type': 'string',
       'minLength': 1,
@@ -28,67 +28,45 @@ const addressSchema = {
 
   },
   'required': [
-    'addressLine1',
+    'address-line-1',
     'town',
     'postcode',
   ],
 }
 
+const camelCaseKeys = (data) => {
+  const convertedData = {}
+  Object.entries(data).forEach(([prop, value]) => {
+    convertedData[camelcase(prop)] = typeof value === 'object' ? camelCaseKeys(value) : value
+  })
+  return convertedData
+}
+
 export default function ManualAddress (props) {
   const { route, appData } = props
-  const { data, setAppData } = appData
-  const [ errors, setErrors ] = useState({})
+  const { data , setAppData } = appData
 
-  console.log('Errors: ', errors)
-
-  useEffect(() => {
-    setErrors(errors)
-  })
-
-  async function onSubmit (formData) {
-    const address = {
-      businessName: formData['business-name'],
-      addressLine1: formData['address-line-1'],
-      addressLine2: formData['address-line-2'],
-      town: formData['town'],
-      county: formData['county'],
-      postcode: formData['postcode'],
-      country: formData['country'],
-      uprn: formData['uprn'],
-    }
-
-    const validator = new Validator()
-    validator.addSchema(addressSchema, '/Address')
-    validator.validate(address, addressSchema).errors.forEach(({property, message}) => {
-      property.substr(property.indexOf('.'))
-      errors[property.substr(property.indexOf('.')+1)] = message
-    })
-
-    if (errors.length) {
-      setAppData({ ...data, address })
-    }
-
-    return errors
+  const handleValidated = (validatedData) => {
+    const convertedData = camelCaseKeys(validatedData)
+    setAppData({...data, address: {...convertedData}})
   }
-
+  
   const { address = {} } = data
 
   return (
-    <Form onSubmit={onSubmit} action={route.path} {...props}>
+    <Form action={route.path} schema={schema} handleValidated={handleValidated} {...props}>
       <Legend>{route.title}</Legend>
       <TextInput
         id="address-line-1"
         label="Building and street"
         labelHidden="line 1 of 2"
         value={address.addressLine1}
-        error={errors.addressLine1}
         {...props}
       />
       <TextInput
         id="address-line-2"
         labelHidden="Building and street line 2"
         value={address.addressLine2}
-        error={errors.addressLine2}
         {...props}
       />
       <TextInput
@@ -96,7 +74,6 @@ export default function ManualAddress (props) {
         label="Town or city"
         value={address.town}
         className='govuk-!-width-two-thirds'
-        error={errors.town}
         {...props}
       />
       <TextInput
@@ -104,7 +81,6 @@ export default function ManualAddress (props) {
         label="County"
         value={address.county}
         className='govuk-!-width-two-thirds'
-        error={errors.county}
         {...props}
       />
       <TextInput
@@ -113,7 +89,6 @@ export default function ManualAddress (props) {
         hint="What ever"
         value={address.postcode}
         className='govuk-input--width-10'
-        error={errors.postcode}
         {...props}
       />
     </Form>

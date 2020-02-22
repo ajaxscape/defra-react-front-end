@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import FormContext from '../FormContext'
 
 function Hint (props) {
   const { id, hint } = props
@@ -28,22 +27,11 @@ function getAriaDescribedBy ({ hintId, errorId }) {
 }
 
 export default function TextInput (props) {
-  const { id, name = id, value: initialValue, type = 'text', label = null, labelHidden = null, hint = null, className = '', error = null } = props
+  const { id, name = id, value = '', type = 'text', label = null, labelHidden = null, hint = null, className = '', error = null, handleChange = null } = props
   const hintId = hint ? `${name}-hint` : null
   const errorId = error ? `${name}-error` : null
 
-  const [value, setValue] = useState(initialValue || '')
-
-  function onChange (e) {
-    setValue(e.target.value)
-  }
-
-  const { data } = useContext(FormContext)
-  data[name] = value
-
   const ariaDescribedBy = getAriaDescribedBy({hintId, errorId})
-
-  console.log(ariaDescribedBy)
 
   return (
     <div className={`govuk-form-group ${error ? 'govuk-form-group--error' : ''}`}>
@@ -58,7 +46,7 @@ export default function TextInput (props) {
         aria-describedby={ariaDescribedBy}
         autoComplete="on"
         spellCheck="false"
-        onChange={onChange}
+        onChange={handleChange}
         value={value}
       />
     </div>
