@@ -3,7 +3,7 @@ import Hint from './Hint'
 import ariaDescribedBy from '../attributes/ariaDescribedBy'
 
 export default function RadioItem (props) {
-  const { item, value: currentValue, error, handleChange } = props
+  const { item, checked, error, handleChange } = props
   const { id, name, value, label, divider = null, hint } = item
   if (divider) {
     return <div className="govuk-radios__divider">{divider}</div>
@@ -16,7 +16,7 @@ export default function RadioItem (props) {
           name={name}
           type="radio"
           value={value}
-          checked={currentValue === value}
+          checked={checked}
           onChange={handleChange}
           aria-describedby={ariaDescribedBy({id, name, hint, error})}
         />

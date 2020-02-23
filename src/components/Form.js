@@ -6,11 +6,11 @@ import { Validator } from 'jsonschema'
 function FormWrapper (props) {
   const { children, handleChange, values, errors, route } = props
   const elements = Children.toArray(children).map((element) => {
-    const { name, value, error } = element.props
+    const { name, value, error} = element.props
     return cloneElement(element, {
       handleChange,
-      value: values[name] === undefined ? value : values[name],
-      error: errors[name] === undefined ? error : errors[name],
+      value: value === undefined ? undefined : value || values[name],
+      error: value === undefined ? undefined : error || errors[name],
       route,
     })
   })

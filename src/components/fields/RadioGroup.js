@@ -13,7 +13,7 @@ export default function RadioGroup (props) {
       <div className="govuk-radios">
         {items.map((item, index) => {
           const id = index ? `${name}-${index + 1}` : name
-          return <RadioItem key={index} item={{ id, name, ...item }} handleChange={handleChange} value={value} error={error}/>
+          return <RadioItem key={index} item={{ id, name, ...item }} handleChange={handleChange} checked={value === item.value} error={error}/>
         })}
       </div>
     </div>

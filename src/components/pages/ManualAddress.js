@@ -35,12 +35,13 @@ const schema = {
 
 export default function ManualAddress (props) {
   const { route, appData } = props
-  const { data , setAppData } = appData
+  const { data, setAppData } = appData
 
-  const handleValidated = (validatedData) => {
-    setAppData({...data, address: {...validatedData}})
+  async function handleValidated (formData) {
+    setAppData({ ...data, address: { ...formData }})
   }
-  
+
+
   const { address = {} } = data
 
   return (
