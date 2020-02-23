@@ -50,10 +50,14 @@ export default function ItemType (props) {
     setAppData({...data, ...formData})
   }
 
+  const { itemType } = data
+
+  console.log('ItemType: ', itemType)
+
   return (
-    <Form handleValidated={handleValidated} schema={schema} action={route.path} {...props}>
+    <Form handleValidated={handleValidated} schema={schema} action={route.path} values={{itemType}} {...props}>
       <Legend>{route.title}</Legend>
-      <RadioGroup name='item-type' items={items} value={data.itemType}/>
+      <RadioGroup name='item-type' items={items} value={itemType}/>
     </Form>
   )
 }

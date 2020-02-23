@@ -9,8 +9,9 @@ function LabelHidden (props) {
 }
 
 export default function TextInput (props) {
-  const { id, name = id, value = '', type = 'text', label = null, labelHidden = null, hint = null, className = '', error = null, handleChange = null } = props
+  const { id, name, value = '', type = 'text', label = null, labelHidden = null, hint = null, className = '', error = null, handleChange = null } = props
 
+  console.log('TextInput props **: ', props)
   return (
     <div className={`govuk-form-group ${error ? 'govuk-form-group--error' : ''}`}>
       <label className="govuk-label" htmlFor={id}>{label}<LabelHidden>{labelHidden}</LabelHidden></label>

@@ -4,6 +4,8 @@ import ariaDescribedBy from '../attributes/ariaDescribedBy'
 
 export default function RadioItem (props) {
   const { item, checked, error, handleChange } = props
+  console.log('RadioItem props: ', props)
+  console.log('Item props: ', item)
   const { id, name, value, label, divider = null, hint } = item
   if (divider) {
     return <div className="govuk-radios__divider">{divider}</div>

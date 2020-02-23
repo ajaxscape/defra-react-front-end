@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react'
 
-export default function useAppData () {
-  const [data, setData] = useState({})
+export default function useAppData (initialData = {}) {
+  const [data, setData] = useState(initialData)
 
-  console.log(data)
+  console.log('AppData: ', data)
 
   const setAppData = useCallback((appData) => {
     setData(appData)

@@ -42,22 +42,24 @@ export default function ManualAddress (props) {
   }
 
 
-  const { address = {} } = data
+  const { address = {} } = {...data}
+
+  console.log('Address: ', address)
 
   return (
-    <Form action={route.path} schema={schema} handleValidated={handleValidated} {...props}>
+    <Form action={route.path} schema={schema} handleValidated={handleValidated} values={address} {...props}>
       <Legend>{route.title}</Legend>
       <TextInput
         id="address-line-1"
         label="Building and street"
         labelHidden="line 1 of 2"
-        value={address.addressLine1}
+        value={address.addressLine_1}
         {...props}
       />
       <TextInput
         id="address-line-2"
         labelHidden="Building and street line 2"
-        value={address.addressLine2}
+        value={address.addressLine_2}
         {...props}
       />
       <TextInput

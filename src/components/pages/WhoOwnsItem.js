@@ -33,10 +33,14 @@ export default function WhoOwnsItem (props) {
     setAppData({...data, ...formData})
   }
 
+  const { ownerType } = data
+
+  console.log('ItemType: ', ownerType)
+
   return (
-    <Form handleValidated={handleValidated} schema={schema} action={route.path} {...props}>
+    <Form handleValidated={handleValidated} schema={schema} action={route.path} values={{ownerType}} {...props}>
       <Legend>{route.title}</Legend>
-      <RadioGroup name='owner-type' items={items} value={data.ownerType}/>
+      <RadioGroup name='owner-type' items={items} value={ownerType}/>
     </Form>
   )
 }

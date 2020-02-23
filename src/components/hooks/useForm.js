@@ -1,25 +1,26 @@
 import { useState, useEffect } from 'react'
-import camelcase from 'camelcase'
+import { camelCase, paramCase } from 'change-case'
 
-const camelCaseKeys = (data) => {
+const convertKeys = (data, converter) => {
   const convertedData = {}
   Object.entries(data).forEach(([prop, value]) => {
-    convertedData[camelcase(prop)] = typeof value === 'object' ? camelCaseKeys(value) : value
+    convertedData[converter(prop)] = typeof value === 'object' ? convertKeys(value, converter) : value
   })
   return convertedData
 }
 
-const useForm = (handleValidated, validate) => {
+const useForm = (handleValidated, validate, initialValues = {}) => {
 
-  const [values, setValues] = useState({})
+  console.log('InitialFormData: ', initialValues)
+  const [values, setValues] = useState() //convertKeys(initialValues, paramCase))
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
-      handleValidated(camelCaseKeys(values))
+      handleValidated(convertKeys(values, camelCase))
     }
-  }, [errors])
+  }, [errors, values])
 
   const handleSubmit = (event) => {
     if (event) {
@@ -31,7 +32,8 @@ const useForm = (handleValidated, validate) => {
 
   const handleChange = (event) => {
     event.persist()
-    setValues((values) => ({ ...values, [event.target.name]: event.target.value }))
+    const {name, value} = event.target
+    setValues((values) => ({ ...values, [name]: value }))
   }
 
   return {
