@@ -1,17 +1,13 @@
 import React from 'react'
-
-function Hint (props) {
-  const { id, item } = props
-  return !item.hint ? null : <span id={id} className="govuk-hint govuk-radios__hint">{item.hint}</span>
-}
+import Hint from './Hint'
+import ariaDescribedBy from '../attributes/ariaDescribedBy'
 
 export default function RadioItem (props) {
-  const { item, value: currentValue, onChange } = props
+  const { item, value: currentValue, error, handleChange } = props
   const { id, name, value, label, divider = null, hint } = item
   if (divider) {
     return <div className="govuk-radios__divider">{divider}</div>
   }
-  const hintId = hint ? `${id}-hint` : null
   return (
       <div className="govuk-radios__item">
         <input
@@ -21,11 +17,11 @@ export default function RadioItem (props) {
           type="radio"
           value={value}
           checked={currentValue === value}
-          onChange={onChange}
-          aria-describedby={hintId}
+          onChange={handleChange}
+          aria-describedby={ariaDescribedBy({id, name, hint, error})}
         />
         <label className="govuk-label govuk-radios__label" htmlFor={id}>{label}</label>
-        <Hint id={hintId} item={item}/>
+        <Hint id={id} hint={hint} className="govuk-radios__hint"/>
       </div>
   )
 }

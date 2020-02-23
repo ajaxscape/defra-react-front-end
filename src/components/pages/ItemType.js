@@ -31,19 +31,30 @@ const items = [
   }
 ]
 
+const schema = {
+  'id': '/ItemType',
+  'type': 'object',
+  'properties': {
+    'item-type': { 'type': 'string' }
+  },
+  'required': [
+    'item-type'
+  ],
+}
+
 export default function ItemType (props) {
   const { route, appData } = props
   const { data, setAppData } = appData
 
-  async function onSubmit (formData) {
-    const itemType = formData['item-type']
+  async function handleSubmit (values) {
+    const itemType = values['item-type']
     if (itemType !== data.itemType) {
       setAppData({...data, itemType})
     }
   }
 
   return (
-    <Form onSubmit={onSubmit} action={route.path} {...props}>
+    <Form handleSubmit={handleSubmit} schema={schema} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
       <RadioGroup name='item-type' items={items} value={data.itemType}/>
     </Form>

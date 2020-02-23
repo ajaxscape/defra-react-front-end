@@ -4,20 +4,49 @@ import Form from '../Form'
 import Legend from '../Legend'
 import TextInput from '../fields/TextInput'
 
+const schema = {
+  'id': '/Address',
+  'type': 'object',
+  'properties': {
+    'business-name': { 'type': 'string' },
+    'address-line-1': {
+      'type': 'string',
+      'minLength': 1,
+    },
+    'address-line-2': { 'type': 'string' },
+    'town': {
+      'type': 'string',
+      'minLength': 1,
+    },
+    'postcode': {
+      'type': 'string',
+      'minLength': 1,
+    },
+    'country': { 'type': 'string' },
+    'uprn': { 'type': 'string' },
+
+  },
+  'required': [
+    'address-line-1',
+    'town',
+    'postcode',
+  ],
+}
+
 export default function ManualAddress (props) {
   const { route, appData } = props
   const { data, setAppData } = appData
 
-  async function onSubmit (formData) {
+  async function handleSubmit (values) {
     const address = {
-      businessName: formData['business-name'],
-      addressLine1: formData['address-line-1'],
-      addressLine2: formData['address-line-2'],
-      town: formData['town'],
-      county: formData['county'],
-      postcode: formData['postcode'],
-      country: formData['country'],
-      uprn: formData['uprn'],
+      businessName: values['business-name'],
+      addressLine1: values['address-line-1'],
+      addressLine2: values['address-line-2'],
+      town: values['town'],
+      county: values['county'],
+      postcode: values['postcode'],
+      country: values['country'],
+      uprn: values['uprn'],
     }
 
     setAppData({ ...data, address })
@@ -26,7 +55,7 @@ export default function ManualAddress (props) {
   const { address = {} } = data
 
   return (
-    <Form onSubmit={onSubmit} action={route.path} {...props}>
+    <Form handleSubmit={handleSubmit} schema={schema} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
       <TextInput
         id="address-line-1"
@@ -60,7 +89,6 @@ export default function ManualAddress (props) {
         label="Postcode"
         value={address.postcode}
         className='govuk-input--width-10'
-        error='Test error'
         {...props}
       />
     </Form>

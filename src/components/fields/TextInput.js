@@ -1,42 +1,38 @@
 import React, { useContext, useState } from 'react'
 import FormContext from '../FormContext'
-
-function Hint (props) {
-  const { id, hint } = props
-  return !hint ? null : <span id={id} className="govuk-hint">{hint}</span>
-}
-
-function LabelHidden (props) {
-  const { children } = props
-  return !children ? null : <span className="govuk-visually-hidden">{children}</span>
-}
+import Error from './Error'
+import Hint from './Hint'
+import VisuallyHidden from './VisuallyHidden'
+import ariaDescribedBy from '../attributes/ariaDescribedBy'
 
 export default function TextInput (props) {
-  const { id, name = id, value: initialValue, type = 'text', label = null, labelHidden = null, hint, className = '', error = null } = props
-  const hintId = hint ? `${id}-hint` : null
+  const { id, name = id, value: initialValue, error = null, type = 'text', label = null, labelHidden = null, hint, className = '' } = props
 
   const [value, setValue] = useState(initialValue || '')
 
-  function onChange (e) {
+  const { data, setFormData } = useContext(FormContext)
+
+  function handleChange (e) {
+    e.persist()
     setValue(e.target.value)
   }
 
-  const { data } = useContext(FormContext)
-  data[name] = value
+  setFormData({...data, [name]: value})
 
   return (
     <div className={`govuk-form-group ${error ? 'govuk-form-group--error' : ''}`}>
-      <label className="govuk-label" htmlFor={id}>{label}<LabelHidden>{labelHidden}</LabelHidden></label>
-      <Hint id={hintId}/>
+      <label className="govuk-label" htmlFor={id}>{label}<VisuallyHidden>{labelHidden}</VisuallyHidden></label>
+      <Hint id={id} hint={hint}/>
+      <Error id={id} error={error}/>
       <input
         id={id}
-        className={`govuk-input ${className}`}
+        className={`govuk-input ${className} ${error ? 'govuk-input--error' : ''}`}
         name={name}
         type={type}
-        aria-describedby={hintId}
+        aria-describedby={ariaDescribedBy({id, hint, error})}
         autoComplete="on"
         spellCheck="false"
-        onChange={onChange}
+        onChange={handleChange}
         value={value}
       />
     </div>
