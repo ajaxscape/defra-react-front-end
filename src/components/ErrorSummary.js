@@ -24,7 +24,7 @@ export default function ErrorSummary (props) {
       <div className="govuk-error-summary__body">
         <ul className="govuk-list govuk-error-summary__list">
           {errorList.map((error, index) => {
-            return <ErrorLine error={error}/>
+            return <ErrorLine  key={index} error={error}/>
           })}
         </ul>
       </div>

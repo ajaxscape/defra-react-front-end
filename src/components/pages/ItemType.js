@@ -39,7 +39,13 @@ const schema = {
   },
   'required': [
     'item-type'
-  ],
+  ]
+}
+
+const errorMessages = {
+  'item-type': {
+    'required': 'Select the type of item it is'
+  }
 }
 
 export default function ItemType (props) {
@@ -54,7 +60,7 @@ export default function ItemType (props) {
   }
 
   return (
-    <Form handleSubmit={handleSubmit} schema={schema} action={route.path} {...props}>
+    <Form handleSubmit={handleSubmit} schema={schema} errorMessages={errorMessages} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
       <RadioGroup name='item-type' items={items} value={data.itemType}/>
     </Form>

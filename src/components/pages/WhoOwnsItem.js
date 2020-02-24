@@ -12,7 +12,6 @@ const items = [
     label: 'Someone else owns it',
     value: 'someone-else'
   }
-
 ]
 
 const schema = {
@@ -23,7 +22,13 @@ const schema = {
   },
   'required': [
     'owner-type'
-  ],
+  ]
+}
+
+const errorMessages = {
+  'owner-type': {
+    'required': 'Select if you own it or someone else owns it'
+  }
 }
 
 export default function WhoOwnsItem (props) {
@@ -38,7 +43,7 @@ export default function WhoOwnsItem (props) {
   }
 
   return (
-    <Form handleSubmit={handleSubmit} schema={schema} action={route.path} {...props}>
+    <Form handleSubmit={handleSubmit} schema={schema} errorMessages={errorMessages} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
       <RadioGroup name='owner-type' items={items} value={data.ownerType}/>
     </Form>

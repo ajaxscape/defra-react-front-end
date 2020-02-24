@@ -19,7 +19,7 @@ function FormWrapper (props) {
 }
 
 export default function Form (props) {
-  const { action = null, schema = null, handleSubmit, nextLink, history } = props
+  const { action = null, schema = null, errorMessages = null, handleSubmit, nextLink, history } = props
 
   const formData = useFormData()
   const { data } = formData
@@ -32,13 +32,22 @@ export default function Form (props) {
       const validator = new Validator()
       validator.addSchema(schema, schema.id)
       const result = validator.validate(values, schema).errors
+      console.log(result)
       result.forEach(({ property, message, name, argument }) => {
-        if (name === 'required') {
-          errors[argument] = message
-        } else
-          errors[property.substr(property.indexOf('.') + 1)] = message
+        let id
+        if (property.includes('.')) {
+          id = property.split('.')[argument]
+        } else {
+          id = argument
+        }
+        if (errorMessages && errorMessages[id] && errorMessages[id][name]) {
+          errors[id] = errorMessages[id][name]
+        } else {
+          errors[id] = message
+        }
       })
     }
+    console.log(errors)
     return errors
   }
 

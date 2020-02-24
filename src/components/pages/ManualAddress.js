@@ -24,13 +24,19 @@ const schema = {
     },
     'country': { 'type': 'string' },
     'uprn': { 'type': 'string' },
+  }
+}
 
+const errorMessages = {
+  'address-line-1': {
+    'minLength': 'First line of the address is required'
   },
-  'required': [
-    'address-line-1',
-    'town',
-    'postcode',
-  ],
+  'town': {
+    'minLength': 'Town is required'
+  },
+  'postcode': {
+    'minLength': 'Postcode is required'
+  }
 }
 
 export default function ManualAddress (props) {
@@ -55,7 +61,7 @@ export default function ManualAddress (props) {
   const { address = {} } = data
 
   return (
-    <Form handleSubmit={handleSubmit} schema={schema} action={route.path} {...props}>
+    <Form handleSubmit={handleSubmit} schema={schema} errorMessages={errorMessages} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
       <TextInput
         id="address-line-1"
