@@ -2,8 +2,9 @@ import React, { Children, cloneElement, useState } from 'react'
 import Button from './fields/Button'
 import FormContext from './FormContext'
 import useFormData from './hooks/useFormData'
-import { Validator } from 'jsonschema'
+import useValidator from './hooks/useValidator'
 import ErrorSummary from './ErrorSummary'
+
 
 function FormWrapper (props) {
   const { children, errors } = props
@@ -26,36 +27,14 @@ export default function Form (props) {
 
   const [ errors, setErrors ] = useState({})
 
-  const validate = (values) => {
-    const errors = {}
-    if (schema) {
-      const validator = new Validator()
-      validator.addSchema(schema, schema.id)
-      const result = validator.validate(values, schema).errors
-      console.log(result)
-      result.forEach(({ property, message, name, argument }) => {
-        let id
-        if (property.includes('.')) {
-          id = property.split('.')[argument]
-        } else {
-          id = argument
-        }
-        if (errorMessages && errorMessages[id] && errorMessages[id][name]) {
-          errors[id] = errorMessages[id][name]
-        } else {
-          errors[id] = message
-        }
-      })
-    }
-    console.log(errors)
-    return errors
-  }
+  const { validate } = useValidator(schema, errorMessages)
 
   async function onSubmitForm (e) {
     e.preventDefault()
     let errors = {}
     if (handleSubmit) {
       errors = validate(data)
+      console.log(errors)
       await handleSubmit(data, errors)
     }
     if (!Object.keys(errors).length) {
