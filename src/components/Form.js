@@ -3,6 +3,7 @@ import Button from './fields/Button'
 import FormContext from './FormContext'
 import useFormData from './hooks/useFormData'
 import { Validator } from 'jsonschema'
+import ErrorSummary from './ErrorSummary'
 
 function FormWrapper (props) {
   const { children, errors } = props
@@ -57,6 +58,7 @@ export default function Form (props) {
 
   return (
     <FormContext.Provider value={formData}>
+      <ErrorSummary errors={errors}/>
       <form action={action} onSubmit={onSubmitForm} method="post" noValidate>
         <div className="govuk-form-group">
           <fieldset className="govuk-fieldset">
