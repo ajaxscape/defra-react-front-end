@@ -1,4 +1,4 @@
-import React, { Children, cloneElement, useState } from 'react'
+import React, { Children, cloneElement } from 'react'
 import Button from './fields/Button'
 import FormContext from './FormContext'
 import useFormData from './hooks/useFormData'
@@ -25,22 +25,17 @@ export default function Form (props) {
   const formData = useFormData()
   const { data } = formData
 
-  const [ errors, setErrors ] = useState({})
-
-  const { validate } = useValidator(schema, errorMessages)
+  const { errors, validate } = useValidator(schema, errorMessages)
 
   async function onSubmitForm (e) {
     e.preventDefault()
-    let errors = {}
+    let valid = true
     if (handleSubmit) {
-      errors = validate(data)
-      console.log(errors)
+      valid = validate(data)
       await handleSubmit(data, errors)
     }
-    if (!Object.keys(errors).length) {
+    if (valid) {
       history.push(nextLink)
-    } else {
-      setErrors(errors)
     }
   }
 

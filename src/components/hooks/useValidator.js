@@ -2,7 +2,9 @@ import React, { useState, useCallback } from 'react'
 import { Validator } from 'jsonschema'
 
 export default function useValidator (schema = null, errorMessages = null) {
-  const validate = (values) => {
+  const [ errors, setErrors ] = useState({})
+
+  const validate = useCallback((values) => {
     const errors = {}
     if (schema) {
       const validator = new Validator()
@@ -23,10 +25,12 @@ export default function useValidator (schema = null, errorMessages = null) {
         }
       })
     }
-    return errors
-  }
+    setErrors(errors)
+    return (!Object.keys(errors).length)
+  })
 
   return {
+    errors,
     validate
   }
 }
