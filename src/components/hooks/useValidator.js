@@ -10,7 +10,6 @@ export default function useValidator (schema = null, errorMessages = null) {
       const validator = new Validator()
       validator.addSchema(schema, schema.id)
       const result = validator.validate(values, schema).errors
-      console.log(result)
       result.forEach(({ property, message, name, argument }) => {
         let id
         if (property.includes('.')) {

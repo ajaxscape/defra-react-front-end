@@ -43,19 +43,21 @@ export default function ManualAddress (props) {
   const { route, appData } = props
   const { data, setAppData } = appData
 
-  async function handleSubmit (values) {
-    const address = {
-      businessName: values['business-name'],
-      addressLine1: values['address-line-1'],
-      addressLine2: values['address-line-2'],
-      town: values['town'],
-      county: values['county'],
-      postcode: values['postcode'],
-      country: values['country'],
-      uprn: values['uprn'],
-    }
+  async function handleSubmit (values, valid) {
+    if (valid) {
+      const address = {
+        businessName: values['business-name'],
+        addressLine1: values['address-line-1'],
+        addressLine2: values['address-line-2'],
+        town: values['town'],
+        county: values['county'],
+        postcode: values['postcode'],
+        country: values['country'],
+        uprn: values['uprn'],
+      }
 
-    setAppData({ ...data, address })
+      setAppData({ ...data, address })
+    }
   }
 
   const { address = {} } = data
