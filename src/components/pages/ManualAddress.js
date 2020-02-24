@@ -1,4 +1,5 @@
 import React from 'react'
+import isEqual from 'lodash.isequal'
 
 import Form from '../Form'
 import Legend from '../Legend'
@@ -24,38 +25,38 @@ const schema = {
     },
     'country': { 'type': 'string' },
     'uprn': { 'type': 'string' },
-  }
+  },
 }
 
 const errorMessages = {
   'address-line-1': {
-    'minLength': 'First line of the address is required'
+    'minLength': 'First line of the address is required',
   },
   'town': {
-    'minLength': 'Town is required'
+    'minLength': 'Town is required',
   },
   'postcode': {
-    'minLength': 'Postcode is required'
-  }
+    'minLength': 'Postcode is required',
+  },
 }
 
 export default function ManualAddress (props) {
   const { route, appData } = props
   const { data, setAppData } = appData
 
-  async function handleSubmit (values, valid) {
-    if (valid) {
-      const address = {
-        businessName: values['business-name'],
-        addressLine1: values['address-line-1'],
-        addressLine2: values['address-line-2'],
-        town: values['town'],
-        county: values['county'],
-        postcode: values['postcode'],
-        country: values['country'],
-        uprn: values['uprn'],
-      }
+  async function handleSubmit (values) {
+    const address = {
+      businessName: values['business-name'],
+      addressLine1: values['address-line-1'],
+      addressLine2: values['address-line-2'],
+      town: values['town'],
+      county: values['county'],
+      postcode: values['postcode'],
+      country: values['country'],
+      uprn: values['uprn'],
+    }
 
+    if (!isEqual(data.address, address)) {
       setAppData({ ...data, address })
     }
   }
@@ -63,7 +64,8 @@ export default function ManualAddress (props) {
   const { address = {} } = data
 
   return (
-    <Form handleSubmit={handleSubmit} schema={schema} errorMessages={errorMessages} action={route.path} {...props}>
+    <Form handleSubmit={handleSubmit} schema={schema}
+          errorMessages={errorMessages} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
       <TextInput
         id="address-line-1"
@@ -100,5 +102,5 @@ export default function ManualAddress (props) {
         {...props}
       />
     </Form>
-)
+  )
 }

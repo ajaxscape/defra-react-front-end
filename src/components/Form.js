@@ -32,7 +32,9 @@ export default function Form (props) {
     let valid = true
     if (handleSubmit) {
       valid = validate(data)
-      await handleSubmit(data, valid)
+      if (valid) {
+        await handleSubmit(data)
+      }
     }
     if (valid) {
       history.push(nextLink)
