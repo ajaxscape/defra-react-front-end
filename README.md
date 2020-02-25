@@ -1,3 +1,5 @@
+# A personal experiment in converting a static DEFRA site into a React spa using the [GDS Design system](https://design-system.service.gov.uk/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
