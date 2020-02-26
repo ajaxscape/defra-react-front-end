@@ -1,9 +1,11 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import Enzyme from 'enzyme'
+import EnzymeAdapter from 'enzyme-adapter-react-16'
+
 import App from './App';
 
-test('Home page ok', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/Hello world/i);
-  expect(linkElement).toBeInTheDocument();
+Enzyme.configure({adapter: new EnzymeAdapter() })
+
+it('Home page ok', () => {
+
 });
