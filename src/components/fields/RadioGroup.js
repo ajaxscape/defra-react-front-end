@@ -1,18 +1,25 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import RadioItem from './RadioItem'
 import FormContext from '../FormContext'
 import Hint from './Hint'
 import Error from './Error'
 
 export default function RadioGroup (props) {
-  const { name = '', items = [], value: initialValue, error = null, hint = null } = props
+  const { name = '', items = [], value: initialValue, validate = null, error = null, hint = null } = props
   const [value, setValue] = useState(initialValue)
 
   const { data, setFormData } = useContext(FormContext)
 
+  // useEffect(() => {
+  //   if (value !== initialValue) {
+  //     validate(data)
+  //   }
+  // }, [data])
+
   function handleChange (e) {
     e.persist()
-    setValue(e.target.value)
+    const { value } = e.target
+    setValue(value)
   }
 
   setFormData({...data, [name]: value})

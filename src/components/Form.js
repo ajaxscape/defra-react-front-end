@@ -7,10 +7,10 @@ import ErrorSummary from './ErrorSummary'
 
 
 function FormWrapper (props) {
-  const { children, errors } = props
+  const { children, errors, validate } = props
   const elements = Children.toArray(children).map((child) => {
     const { id, name } = child.props
-    return cloneElement(child, { error: errors[id || name] })
+    return cloneElement(child, { validate, error: errors[id || name] })
   })
   return (
     <div className='form-wrapper'>
@@ -41,13 +41,17 @@ export default function Form (props) {
     }
   }
 
+  function onValidate () {
+    return validate(data)
+  }
+
   return (
     <FormContext.Provider value={formData}>
       <ErrorSummary errors={errors}/>
       <form action={action} onSubmit={onSubmitForm} method="post" noValidate>
         <div className="govuk-form-group">
           <fieldset className="govuk-fieldset">
-            <FormWrapper {...props} errors={errors}/>
+            <FormWrapper {...props} errors={errors} validate={onValidate}/>
           </fieldset>
         </div>
 

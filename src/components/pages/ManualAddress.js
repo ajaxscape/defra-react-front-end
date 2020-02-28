@@ -64,8 +64,7 @@ export default function ManualAddress (props) {
   const { address = {} } = data
 
   return (
-    <Form handleSubmit={handleSubmit} schema={schema}
-          errorMessages={errorMessages} action={route.path} {...props}>
+    <Form handleSubmit={handleSubmit} schema={schema} errorMessages={errorMessages} action={route.path} {...props}>
       <Legend>{route.title}</Legend>
       <TextInput
         id="address-line-1"
