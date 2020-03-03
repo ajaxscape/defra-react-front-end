@@ -18,15 +18,17 @@ const copyrightLink = 'https://www.nationalarchives.gov.uk/information-managemen
 
 function App () {
   return (
-    <Router>
-      <a href="#main-content" className="govuk-skip-link">Skip to main content</a>
-      <Header homeLink={routes.home.path} homeRoute={routes.home} serviceName={serviceName}/>
-      <div className="govuk-width-container">
-        <PhaseBanner phase={phase} feedbackLink={feedbackLink}/>
-        <Main/>
-      </div>
-      <Footer licenceLink={licenceLink} copyrightLink={copyrightLink}/>
-    </Router>
+    <div data-test="component-app">
+      <Router>
+        <a href="#main-content" className="govuk-skip-link">Skip to main content</a>
+        <Header homeLink={routes.home.path} homeRoute={routes.home} serviceName={serviceName}/>
+        <div className="govuk-width-container">
+          <PhaseBanner phase={phase} feedbackLink={feedbackLink}/>
+          <Main/>
+        </div>
+        <Footer licenceLink={licenceLink} copyrightLink={copyrightLink}/>
+      </Router>
+    </div>
   )
 }
 
