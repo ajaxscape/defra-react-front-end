@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Home (props) {
   const { nextLink } = props
   return (
-    <div>
+    <Fragment>
       <h1>Hello World</h1>
       <Link to = {nextLink}>Next</Link>
-    </div>
+    </Fragment>
   )
 }

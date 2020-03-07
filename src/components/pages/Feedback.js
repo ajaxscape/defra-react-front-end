@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 export default function Feedback () {
   return (
-    <div>
+    <Fragment>
       <h1>Feedback</h1>
-    </div>
+    </Fragment>
   )
 }
