@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import FormContext from '../FormContext'
 import Error from './Error'
 import Hint from './Hint'
@@ -6,17 +6,11 @@ import VisuallyHidden from './VisuallyHidden'
 import ariaDescribedBy from '../attributes/ariaDescribedBy'
 
 export default function TextInput (props) {
-  const { id, name = id, value: initialValue, error = null, validate = null, type = 'text', label = null, labelHidden = null, hint, className = '' } = props
+  const { id, name = id, value: initialValue, error = null, type = 'text', label = null, labelHidden = null, hint, className = '' } = props
 
   const [value, setValue] = useState(initialValue)
 
   const { data, setFormData } = useContext(FormContext)
-
-  // useEffect(() => {
-  //   if (value !== initialValue) {
-  //     validate(data)
-  //   }
-  // }, [data])
 
   function handleChange (e) {
     e.persist()

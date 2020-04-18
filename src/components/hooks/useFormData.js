@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import isEqual from 'lodash.isequal'
 
 export default function useFormData () {
@@ -8,7 +8,7 @@ export default function useFormData () {
     if (!isEqual(data, formData)) {
       setData(formData)
     }
-  })
+  }, [data])
 
   return {
     data,

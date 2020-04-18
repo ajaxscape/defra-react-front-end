@@ -26,17 +26,25 @@ const schema = {
     'country': { 'type': 'string' },
     'uprn': { 'type': 'string' },
   },
+  'required': [
+    'address-line-1',
+    'town',
+    'postcode',
+  ],
 }
 
 const errorMessages = {
   'address-line-1': {
     'minLength': 'First line of the address is required',
+    'required': 'First line of the address is required'
   },
   'town': {
     'minLength': 'Town is required',
+    'required': 'Town is required'
   },
   'postcode': {
     'minLength': 'Postcode is required',
+    'required': 'Postcode is required'
   },
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { Validator } from 'jsonschema'
 
 export default function useValidator (schema = null, errorMessages = null) {
@@ -26,7 +26,7 @@ export default function useValidator (schema = null, errorMessages = null) {
     }
     setErrors(errors)
     return (!Object.keys(errors).length)
-  })
+  }, [errorMessages, schema])
 
   return {
     errors,

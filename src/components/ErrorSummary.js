@@ -1,5 +1,4 @@
 import React from 'react'
-import RadioItem from './fields/RadioItem'
 
 function ErrorLine (props) {
   const { id, message } = props.error
