@@ -9,12 +9,12 @@ const schema = {
   'id': '/Address',
   'type': 'object',
   'properties': {
-    'business-name': { 'type': 'string' },
+    'business-name': {'type': 'string'},
     'address-line-1': {
       'type': 'string',
       'minLength': 1,
     },
-    'address-line-2': { 'type': 'string' },
+    'address-line-2': {'type': 'string'},
     'town': {
       'type': 'string',
       'minLength': 1,
@@ -23,8 +23,8 @@ const schema = {
       'type': 'string',
       'minLength': 1,
     },
-    'country': { 'type': 'string' },
-    'uprn': { 'type': 'string' },
+    'country': {'type': 'string'},
+    'uprn': {'type': 'string'},
   },
   'required': [
     'address-line-1',
@@ -48,11 +48,11 @@ const errorMessages = {
   },
 }
 
-export default function ManualAddress (props) {
-  const { route, appData } = props
-  const { data, setAppData } = appData
+export default function ManualAddress(props) {
+  const {route, appData} = props
+  const {data, setAppData} = appData
 
-  async function handleSubmit (values) {
+  async function handleSubmit(values) {
     const address = {
       businessName: values['business-name'],
       addressLine1: values['address-line-1'],
@@ -65,11 +65,11 @@ export default function ManualAddress (props) {
     }
 
     if (!isEqual(data.address, address)) {
-      setAppData({ ...data, address })
+      setAppData({...data, address})
     }
   }
 
-  const { address = {} } = data
+  const {address = {}} = data
 
   return (
     <Form handleSubmit={handleSubmit} schema={schema} errorMessages={errorMessages} action={route.path} {...props}>

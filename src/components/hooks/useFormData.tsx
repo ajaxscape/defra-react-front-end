@@ -1,7 +1,7 @@
-import { useState, useCallback } from 'react'
+import {useState, useCallback} from 'react'
 import isEqual from 'lodash.isequal'
 
-export default function useFormData () {
+export default function useFormData() {
   const [data, setData] = useState({})
 
   const setFormData = useCallback((formData) => {

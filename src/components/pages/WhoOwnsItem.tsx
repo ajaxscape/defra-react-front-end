@@ -18,7 +18,7 @@ const schema = {
   'id': '/WhoOwnsItem',
   'type': 'object',
   'properties': {
-    'owner-type': { 'type': 'string' }
+    'owner-type': {'type': 'string'}
   },
   'required': [
     'owner-type'
@@ -31,11 +31,11 @@ const errorMessages = {
   }
 }
 
-export default function WhoOwnsItem (props) {
-  const { route, appData } = props
-  const { data, setAppData } = appData
+export default function WhoOwnsItem(props) {
+  const {route, appData} = props
+  const {data, setAppData} = appData
 
-  async function handleSubmit (values) {
+  async function handleSubmit(values) {
     const ownerType = values['owner-type']
     if (ownerType !== data.ownerType) {
       setAppData({...data, ownerType})

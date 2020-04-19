@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function PhaseBanner (props) {
-  const { phase = null, feedbackLink = '#' } = props
+export default function PhaseBanner(props) {
+  const {phase = null, feedbackLink = '#'} = props
   return !phase ? null : (
     <div className="govuk-phase-banner">
       <p className="govuk-phase-banner__content">

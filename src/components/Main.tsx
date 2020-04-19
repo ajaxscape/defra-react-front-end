@@ -1,12 +1,12 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 
 import AppContext from './AppContext'
 import useAppData from './hooks/useAppData'
 
 import routes from '../routes'
 
-export default function Main () {
+export default function Main() {
   const appData = useAppData()
 
   return (
@@ -17,12 +17,12 @@ export default function Main () {
             <Switch>
               {Object.values(routes).map((route, index) => {
                 return <Route key={index}
-                  path={route.path}
-                  exact
-                  render={(props) => {
-                    const nextLink = route.next && routes[route.next].path
-                    return <route.component {...{ ...props, route, nextLink, appData }} />
-                  }}
+                              path={route.path}
+                              exact
+                              render={(props) => {
+                                const nextLink = route.next && routes[route.next].path
+                                return <route.component {...{...props, route, nextLink, appData}} />
+                              }}
                 />
               })}
             </Switch>

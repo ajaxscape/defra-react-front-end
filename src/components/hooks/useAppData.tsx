@@ -1,6 +1,6 @@
-import { useState, useCallback } from 'react'
+import {useState, useCallback} from 'react'
 
-export default function useAppData () {
+export default function useAppData() {
   const [data, setData] = useState({})
 
   console.log(data)

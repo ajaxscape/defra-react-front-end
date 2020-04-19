@@ -1,7 +1,10 @@
 import React from 'react'
 
-export default function Button (props) {
-  const { children = null } = props
+interface Props {
+  children: [] | null
+}
+
+export default function Button({children = null}: Props) {
   return (
     <button className="govuk-button" data-module="govuk-button">
       {children}

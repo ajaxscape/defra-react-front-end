@@ -1,5 +1,5 @@
-module.exports = function override(config, env) {
+module.exports = function override (config, env) {
   console.log(config.output)
   //do stuff with the webpack config...
-  return config;
+  return config
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import './application.scss'
-import { BrowserRouter as Router} from 'react-router-dom'
+import {BrowserRouter as Router} from 'react-router-dom'
 
 import Header from './components/Header'
 import PhaseBanner from './components/PhaseBanner'
@@ -16,7 +16,7 @@ const feedbackLink = '/feedback'
 const licenceLink = 'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/'
 const copyrightLink = 'https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/'
 
-function App () {
+function App() {
   return (
     <Router>
       <a href="#main-content" className="govuk-skip-link">Skip to main content</a>

@@ -23,7 +23,7 @@ const items = [
     value: 'apply-to-register-to-sell-an-item-to-a-museum'
   },
 
-  { divider: 'or' },
+  {divider: 'or'},
 
   {
     label: 'Item of outstanding artistic, cultural or historical value made before 1918',
@@ -35,7 +35,7 @@ const schema = {
   'id': '/ItemType',
   'type': 'object',
   'properties': {
-    'item-type': { 'type': 'string' }
+    'item-type': {'type': 'string'}
   },
   'required': [
     'item-type'
@@ -48,11 +48,11 @@ const errorMessages = {
   }
 }
 
-export default function ItemType (props) {
-  const { route, appData } = props
-  const { data, setAppData } = appData
+export default function ItemType(props) {
+  const {route, appData} = props
+  const {data, setAppData} = appData
 
-  async function handleSubmit (values) {
+  async function handleSubmit(values) {
     const itemType = values['item-type']
     if (itemType !== data.itemType) {
       setAppData({...data, itemType})

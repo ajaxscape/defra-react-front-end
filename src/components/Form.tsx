@@ -1,33 +1,20 @@
-import React, { Children, cloneElement } from 'react'
+import React, {Children, cloneElement} from 'react'
 import Button from './fields/Button'
 import FormContext from './FormContext'
 import useFormData from './hooks/useFormData'
 import useValidator from './hooks/useValidator'
 import ErrorSummary from './ErrorSummary'
+import FormWrapper from "./FormWrapper";
 
-
-function FormWrapper (props) {
-  const { children, errors, validate } = props
-  const elements = Children.toArray(children).map((child) => {
-    const { id, name } = child.props
-    return cloneElement(child, { validate, error: errors[id || name] })
-  })
-  return (
-    <div className='form-wrapper'>
-      {elements}
-    </div>
-  )
-}
-
-export default function Form (props) {
-  const { action = null, schema = null, errorMessages = null, handleSubmit, nextLink, history } = props
+export default function Form(props) {
+  const {action = null, schema = null, errorMessages = null, handleSubmit, nextLink, history} = props
 
   const formData = useFormData()
-  const { data } = formData
+  const {data} = formData
 
-  const { errors, validate } = useValidator(schema, errorMessages)
+  const {errors, validate} = useValidator(schema, errorMessages)
 
-  async function onSubmitForm (e) {
+  async function onSubmitForm(e) {
     e.preventDefault()
     let valid = true
     if (handleSubmit) {
@@ -41,7 +28,7 @@ export default function Form (props) {
     }
   }
 
-  function onValidate () {
+  function onValidate() {
     return validate(data)
   }
 

@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 import routes from '../routes'
 
-function Logo () {
+function Logo() {
   return (
     <svg role="presentation" focusable="false"
          className="govuk-header__logotype-crown"
@@ -18,8 +18,8 @@ function Logo () {
   )
 }
 
-export default function Header (props) {
-  const { serviceName = '' } = props
+export default function Header(props) {
+  const {serviceName = ''} = props
   return (
     <header className="govuk-header " role="banner" data-module="govuk-header">
       <div className="govuk-header__container govuk-width-container">
@@ -32,7 +32,8 @@ export default function Header (props) {
           </Link>
         </div>
         <div className="govuk-header__content">
-          <Link to={routes.home.path} className="govuk-header__link govuk-header__link--service-name">{serviceName}</Link>
+          <Link to={routes.home.path}
+                className="govuk-header__link govuk-header__link--service-name">{serviceName}</Link>
         </div>
       </div>
     </header>

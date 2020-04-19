@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react'
-import { Validator } from 'jsonschema'
+import {useState, useCallback} from 'react'
+import {Validator} from 'jsonschema'
 
-export default function useValidator (schema = null, errorMessages = null) {
-  const [ errors, setErrors ] = useState({})
+export default function useValidator(schema = null, errorMessages = null) {
+  const [errors, setErrors] = useState({})
 
   const validate = useCallback((values) => {
     const errors = {}
@@ -10,7 +10,7 @@ export default function useValidator (schema = null, errorMessages = null) {
       const validator = new Validator()
       validator.addSchema(schema, schema.id)
       const result = validator.validate(values, schema).errors
-      result.forEach(({ property, message, name, argument }) => {
+      result.forEach(({property, message, name, argument}) => {
         let id
         if (property.includes('.')) {
           id = property.split('.')[argument]
