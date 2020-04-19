@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {ReactChildren} from 'react'
 
 interface Props {
-  children: [] | null
+  children: string;
 }
 
-export default function Button({children = null}: Props) {
+export default function Button({children}: Props) {
   return (
     <button className="govuk-button" data-module="govuk-button">
       {children}

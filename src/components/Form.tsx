@@ -5,16 +5,25 @@ import useFormData from './hooks/useFormData'
 import useValidator from './hooks/useValidator'
 import ErrorSummary from './ErrorSummary'
 import FormWrapper from "./FormWrapper";
+import {Schema} from "jsonschema";
 
-export default function Form(props) {
-  const {action = null, schema = null, errorMessages = null, handleSubmit, nextLink, history} = props
+interface Props {
+  action: string | undefined;
+  schema: Schema;
+  errorMessages: string | undefined;
+  handleSubmit: (data: FormData | any) => {};
+  nextLink: string | null;
+  history: any;
+}
+
+export default function Form({action, schema, errorMessages, handleSubmit, nextLink, history}: Props) {
 
   const formData = useFormData()
   const {data} = formData
 
   const {errors, validate} = useValidator(schema, errorMessages)
 
-  async function onSubmitForm(e) {
+  async function onSubmitForm(e: React.FormEvent) {
     e.preventDefault()
     let valid = true
     if (handleSubmit) {

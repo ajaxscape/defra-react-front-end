@@ -1,10 +1,16 @@
-import React, {Children, cloneElement} from "react";
+import React, {Children, cloneElement, DetailedReactHTMLElement, ReactChildren, ReactElement} from "react";
 
-export default function FormWrapper(props) {
-  const {children, errors, validate} = props
+interface Props {
+  children: ReactChildren;
+  errors: []
+  validate: () => {}
+}
+
+export default function FormWrapper({children, errors, validate}: Props) {
   const elements = Children.toArray(children).map((child) => {
-    const {id, name} = child.props
-    return cloneElement(child, {validate, error: errors[id || name]})
+    return child
+    // const {id, name} = child
+    // return cloneElement(child, {validate, error: errors[id || name]})
   })
   return (
     <div className='form-wrapper'>
